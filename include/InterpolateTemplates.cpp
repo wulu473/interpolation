@@ -1,3 +1,4 @@
+#include <iostream>
 
 template<typename UIt, typename WIt, typename SIt>
 typename UIt::value_type
@@ -29,8 +30,8 @@ Interpolate::nonUniform1D(const SIt& sBegin, const SIt& sEnd,
     w += *wIt;
     u += (*wIt)*(*uIt);
   }
-  u -= (*(sIt-1)-b)*(*(wIt-1))*(*(uIt-1));
-  w -= (*(sIt-1)-b)*(*(wIt-1));
+  u -= (*(sIt)-b)*(*(wIt-1))*(*(uIt-1));
+  w -= (*(sIt)-b)*(*(wIt-1));
 
   return u/w;
 }
