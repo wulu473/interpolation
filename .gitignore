@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+unit-tests
 
 # Temporary editor files
 .*.swp

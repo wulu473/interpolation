@@ -1,13 +1,22 @@
 
 TESTS:=$(wildcard tests/*.cpp)
-TESTOBJS:=objects/tests/main.o
+TESTOBJS:=objects/tests/main.o objects/tests/InterpolateTests.o
+
+INCLUDES+= -Iinclude
 
 LDLIBS+=-lboost_unit_test_framework-mt
+
+CXXFLAGS+=-std=c++11 -g
 
 .PHONY: all
 all: unit-tests
 
-objects/tests/main.o: tests/main.cpp include/Interpolate.hpp
+objects/tests/InterpolateTests.o: tests/InterpolateTests.cpp include/Interpolate.hpp include/InterpolateTemplates.cpp
+	@echo -n "Compiling $<..."	
+	@$(CXX) $(INCLUDES) $(CXXFLAGS) -DBOOST_LOG_DYN_LINK -DBOOST_TEST_DYN_LINK -c $< -o $@
+	@echo " done"
+
+objects/tests/main.o:
 	@echo -n "Compiling $<..."	
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) -DBOOST_LOG_DYN_LINK -DBOOST_TEST_DYN_LINK -c $< -o $@
 	@echo " done"
